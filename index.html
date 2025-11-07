@@ -113,19 +113,85 @@
     .program:hover{transform:translateY(-8px)}
 
     /* TRAINERS */
-    .trainers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
-    .trainer-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);transition:transform .28s}
-    .trainer-card:focus-within,.trainer-card:hover{transform:translateY(-8px);box-shadow:0 14px 40px rgba(0,0,0,0.6)}
-    .trainer-img{width:100%;height:260px;background-size:cover;background-position:center}
-    .trainer-body{padding:14px}
-    .trainer-body h4{color:var(--gold);margin:0 0 8px}
-    .trainer-body p{color:var(--muted);font-size:0.95rem;line-height:1.45}
+.trainers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
 
-    /* TRAINER image recommended:
-       - Width: 800 ~ 1200 px
-       - Height: ~600 px (keep similar aspect ratio)
-       - Format: JPEG or WebP, target size 80~200 KB per image
-    */
+.trainer-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.03);
+  transition: transform .28s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-height: 460px; /* ✅ 카드 전체 높이 제한 */
+}
+
+.trainer-card:focus-within,
+.trainer-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.6);
+}
+
+.trainer-img {
+  width: 100%;
+  height: 260px;
+  background-size: cover;
+  background-position: center;
+}
+
+.trainer-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-grow: 1;
+}
+
+.trainer-body h4 {
+  color: var(--gold);
+  margin: 0 0 8px;
+}
+
+.trainer-body p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  overflow-y: auto;            /* ✅ 스크롤 활성화 */
+  max-height: 100px;           /* ✅ 설명 텍스트 영역 높이 제한 */
+  scrollbar-width: thin;       /* Firefox */
+  scrollbar-color: var(--gold) #222;
+}
+
+/* 스크롤바 스타일 (웹킷 브라우저용) */
+.trainer-body p::-webkit-scrollbar {
+  width: 6px;
+}
+.trainer-body p::-webkit-scrollbar-thumb {
+  background-color: var(--gold);
+  border-radius: 3px;
+}
+.trainer-body p::-webkit-scrollbar-track {
+  background-color: #222;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .trainer-img { height: 220px; }
+  .trainer-body p { max-height: 80px; }
+}
+
+/* TRAINER image recommended:
+   - Width: 800 ~ 1200 px
+   - Height: ~600 px (keep similar aspect ratio)
+   - Format: JPEG or WebP, target size 80~200 KB per image
+*/
+
 
     /* GALLERY */
     .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:18px}
@@ -177,7 +243,7 @@
     <div class="container">
       <div class="brand">
         <img src="images/dallagym-logo_B.png" alt="Dallagym logo">
-        <div style="font-weight:800;color:var(--gold);font-size:1.05rem">Dallagym</div>
+        <div style="font-weight:800;color:var(--gold);font-size:1.05rem">양재점</div>
       </div>
 
       <nav role="navigation" aria-label="Primary">
@@ -205,8 +271,8 @@
       <div class="overlay" aria-hidden="true"></div>
 
       <div class="content wrap" role="region" aria-label="Hero content">
-        <h1>프리미엄 PT 스튜디오 Dallagym</h1>
-        <p class="lead">강렬한 에너지와 고급스러운 맞춤 트레이닝 — 당신의 목표를 디자인합니다.</p>
+        <h1>국가대표 PT 스튜디오 Dallagym</h1>
+        <p class="lead">보디빌딩 국가대표 출신이 직접 운영하고 있는 양재 pt샵!</p>
 
         <!-- Buttons: PC-only (kakao) / Mobile (kakao + call) -->
         <div class="btn-row" role="group" aria-label="Consultation actions">
@@ -231,8 +297,12 @@
       <h2 id="about-title" class="section-title">ABOUT DALLAGYM</h2>
       <div class="card" style="max-width:1000px;margin:0 auto">
         <p>
-          Dallagym은 블랙·골드·레드의 강렬한 정체성을 바탕으로, 프리미엄 1:1 개인 트레이닝과 체형교정,
-          퍼포먼스 향상 프로그램을 제공합니다. 전문 트레이너의 과학적 분석과 맞춤 커리큘럼으로 안전하고 지속 가능한 변화를 약속합니다.
+          서초구 양재동 지상 2층에 위치한 달라짐 PT 스튜디오는 30년 경력의 보디빌딩 국가대표 출신이 직접 운영하는 전문 PT샵입니다. </br>
+		  쾌적한 공기를 위해 개방감 있는 공간에 뉴텍, 싸이벡스 등 최고급 기구와 다양한 유산소 기구를 갖추고 있습니다. </br>
+		  1:1 또는 2:1 PT를 통해 다이어트, 체형 교정은 물론 바디프로필, 보디빌딩 선수 시합 준비까지 모든 운동 목표 달성을 체계적으로 도와드립니다. </br>
+		  PT 등록 회원분들께는 공휴일을 포함하여 언제든지 자유로운 개인 운동이 가능하며, 시설 이용료와 회원복, 남녀 분리 샤워실, 
+		  개인 신발 보관함 등 모든 편의를 무료로 제공해 드립니다. </br>
+		  항상 깔끔하게 관리되는 쾌적한 환경에서 '가족에게 운동을 알려드리는 마음'으로 진정성 있게 트레이닝하여 원하시는 목표를 이뤄드리겠습니다.
         </p>
       </div>
     </section>
@@ -274,8 +344,14 @@
         <article class="trainer-card" role="listitem" aria-labelledby="t1">
           <div class="trainer-img" style="background-image:url('images/trainer1.jpg')" role="img" aria-label="트레이너 김하늘"></div>
           <div class="trainer-body">
-            <h4 id="t1">김하늘</h4>
-            <p>체형교정 및 근력 강화 전문. 고객의 몸 상태를 분석하여 안전한 맞춤 코칭을 제공합니다.</p>
+            <h4 id="t1">장동훈</h4>
+            <p>전) 2024 대한보디빌딩협회 국가대표 감독</br>
+                  현) 서울특별시 보디빌딩협회 회장</br>
+                  현) 대한보디빌딩협회 심판</br>
+                  현) 국제심판</br>
+                  전) 국민대학교 교수</br>
+                  전) 강남구 보디빌딩협회 회장</br>
+                  전) 전국체전 서울 대표 선수단 감독</p>
           </div>
         </article>
 
@@ -422,9 +498,9 @@
       <div class="wrap">
         <h2 id="contact-title" class="section-title" style="color:var(--gold)">CONTACT US</h2>
         <div class="contact-card" role="region" aria-label="Contact information">
-          <p>문의 및 상담: <strong>010-1234-5678</strong></p>
-          <p>주소: <strong>서울시 강남구 양재동</strong></p>
-          <p style="color:var(--muted);margin-top:8px">운영시간: 평일 07:00 - 22:00 / 주말 09:00 - 18:00</p>
+          <p>문의 및 상담: <strong>02-579-8485</strong></p>
+          <p>주소: <strong>서울 서초구 강남대로30길 57 수형빌딩 2층</strong></p>
+          <p style="color:var(--muted);margin-top:8px">운영시간: 평일 06:00 - 24:00 / 주말 08:00 - 22:00</p>
         </div>
       </div>
     </section>
@@ -439,8 +515,8 @@
   <!-- ====== SCRIPT: slider, button behavior, accessibility ====== -->
   <script>
     // ====== CONFIG - replace with your actual contact info ======
-    const kakaoUrl = 'https://pf.kakao.com/_yourkakaoID'; // <-- 카카오채널/오픈채팅 주소로 교체
-    const phoneNumber = '010-1234-5678'; // <-- 실제 상담번호로 교체
+    const kakaoUrl = 'http://pf.kakao.com/_GxcGTd/chat'; // <-- 카카오채널/오픈채팅 주소로 교체
+    const phoneNumber = '02-579-8485'; // <-- 실제 상담번호로 교체
 
     // ====== HERO Slider ======
     (function(){
