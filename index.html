@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dallagym | Premium PT Studio</title>
+
+  <!-- Font: Montserrat (Google Fonts) - 상업적 사용 가능 -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <meta name="description" content="Dallagym - 프리미엄 PT 스튜디오. 1:1 맞춤 트레이닝, 체형교정, 퍼포먼스 향상" />
+
+  <style>
+    :root{
+      --black:#070707;
+      --card:#0f0f0f;
+      --gold:#f5d142;
+      --gold-dark:#d4af37;
+      --red:#e03131;
+      --muted:#cfcfcf;
+      --max-width:1200px;
+      --focus: 3px solid rgba(245,209,66,0.25);
+    }
+
+    /* Reset & base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      background:var(--black);color:#fff;line-height:1.4;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit}
+    img{display:block;max-width:100%;height:auto}
+
+    /* Accessibility skip link */
+    .skip-link{
+      position:absolute;left:8px;top:8px;background:#111;padding:8px 12px;border-radius:6px;color:var(--gold);
+      z-index:2000;transform:translateY(-120%);transition:transform .18s;
+    }
+    .skip-link:focus{transform:translateY(0);outline:none;box-shadow:var(--focus)}
+
+    /* HEADER */
+    header{
+      position:fixed;top:0;left:0;right:0;background:linear-gradient(180deg, rgba(0,0,0,0.88), rgba(0,0,0,0.6));
+      border-bottom:1px solid rgba(212,175,55,0.06);z-index:1200;
+      backdrop-filter: blur(6px);
+    }
+    .container{max-width:var(--max-width);margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:46px}
+    nav{display:flex;gap:18px;align-items:center}
+    nav a{color:var(--gold);font-weight:700;font-size:0.95rem;text-decoration:none}
+    nav a:focus{outline:none;box-shadow:var(--focus);border-radius:6px;padding:4px}
+
+    /* HERO: rolling background slides */
+    .hero{position:relative;height:92vh;min-height:520px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .hero .slide{
+      position:absolute;inset:0;background-position:center;background-size:cover;opacity:0;transition:opacity 1.2s ease-in-out;
+    }
+    .hero .slide.active{opacity:1}
+    .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.6));pointer-events:none}
+
+    .hero .content{
+      position:relative;z-index:6;text-align:center;padding:12px;
+      max-width:1100px;width:100%;
+    }
+    .hero h1{font-size:clamp(28px,6vw,56px);color:var(--gold);margin:0 0 10px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+    .hero p{color:var(--muted);margin:0 auto 18px;max-width:880px}
+
+    .btn-row{display:flex;gap:12px;align-items:center;justify-content:center}
+    .consult-btn{
+      position:relative;overflow:hidden;border:0;padding:14px 36px;border-radius:999px;font-weight:800;cursor:pointer;
+      color:#fff;background:linear-gradient(90deg,var(--red),#ff6b6b);box-shadow:0 10px 28px rgba(224,49,49,0.14);transition:transform .18s,box-shadow .18s;
+      font-size:1.05rem;
+    }
+    .consult-btn.call{background:linear-gradient(90deg,var(--gold),var(--gold-dark));color:#071}
+    .consult-btn:focus{outline:none;box-shadow:var(--focus);border-radius:999px}
+    .consult-btn:hover{transform:translateY(-6px)}
+
+    /* button shine / pulse */
+    .consult-btn::after{
+      content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;
+      background:linear-gradient(120deg, rgba(255,255,255,0.06), rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+      transform:skewX(-20deg);animation:shine 2.8s linear infinite;
+    }
+    @keyframes shine{0%{left:-80%}100%{left:180%}}
+    .consult-btn:active{animation:pulse .18s ease-in-out}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(.96)}100%{transform:scale(1)}}
+
+    /* PC/MOBILE toggles */
+    .pc-only{display:inline-flex}
+    .mobile-only{display:none}
+
+    /* SECTION base */
+    main{margin-top:76px}
+    section{padding:84px 20px}
+    .wrap{max-width:var(--max-width);margin:0 auto}
+    .section-title{font-size:1.9rem;color:var(--gold);text-align:center;margin-bottom:10px;font-weight:800}
+    .lead{color:var(--muted);text-align:center;margin-bottom:18px}
+
+    /* ABOUT */
+    #about .card{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);max-width:980px;margin:0 auto;color:var(--muted)}
+
+    /* PROGRAMS with parallax-like bg (simple fixed bg) */
+    .programs-section{
+      position:relative;color:#fff;background-attachment:fixed;background-position:center;background-size:cover;
+      /* Replace the background image via inline style on the section element */
+    }
+    .program-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:18px}
+    .program{background:var(--card);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .25s}
+    .program h3{color:var(--gold);margin-bottom:12px}
+    .program:hover{transform:translateY(-8px)}
+
+    /* TRAINERS */
+    .trainers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
+    .trainer-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);transition:transform .28s}
+    .trainer-card:focus-within,.trainer-card:hover{transform:translateY(-8px);box-shadow:0 14px 40px rgba(0,0,0,0.6)}
+    .trainer-img{width:100%;height:260px;background-size:cover;background-position:center}
+    .trainer-body{padding:14px}
+    .trainer-body h4{color:var(--gold);margin:0 0 8px}
+    .trainer-body p{color:var(--muted);font-size:0.95rem;line-height:1.45}
+
+    /* TRAINER image recommended:
+       - Width: 800 ~ 1200 px
+       - Height: ~600 px (keep similar aspect ratio)
+       - Format: JPEG or WebP, target size 80~200 KB per image
+    */
+
+    /* GALLERY */
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:18px}
+    .gallery-grid img{width:100%;height:160px;object-fit:cover;border-radius:8px;transition:transform .32s}
+    .gallery-grid img:hover{transform:scale(1.04)}
+    /* Gallery image recommended:
+       - Thumbnail: width 800~1200px, height ~ (preserve aspect), WebP preferred, 70~150 KB
+    */
+
+    /* CONTACT with parallax-like bg */
+    .contact-section{position:relative;color:#fff;background-attachment:fixed;background-position:center;background-size:cover;border-top:1px solid rgba(255,255,255,0.02)}
+    .contact-card{max-width:720px;margin:0 auto;background:linear-gradient(180deg, rgba(0,0,0,0.48), rgba(0,0,0,0.48));padding:22px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);text-align:center}
+    .contact-card p{color:var(--muted);margin:8px 0;font-size:1.05rem}
+
+    /* FOOTER */
+    footer{padding:28px 12px;text-align:center;color:#9b9b9b;background:linear-gradient(180deg,#070707,#050505)}
+
+    /* RESPONSIVE */
+    @media (max-width:980px){
+      .container{padding:12px}
+      .hero{height:78vh;min-height:420px}
+      .trainer-img{height:200px}
+      .gallery-grid img{height:140px}
+    }
+    @media (max-width:780px){
+      nav{display:none}
+      .pc-only{display:none}
+      .mobile-only{display:flex;flex-direction:column;gap:10px}
+      .hero h1{font-size:clamp(20px,6vw,32px)}
+      .hero p{font-size:0.98rem}
+      .program-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+      .hero{background-position:center}
+      section{padding:48px 14px}
+    }
+
+    /* Reduced motion preference */
+    @media (prefers-reduced-motion: reduce){
+      *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important}
+      .consult-btn::after{display:none}
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip link for accessibility -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Header -->
+  <header role="banner" aria-label="Main header">
+    <div class="container">
+      <div class="brand">
+        <img src="images/dallagym-logo_B.png" alt="Dallagym logo">
+        <div style="font-weight:800;color:var(--gold);font-size:1.05rem">Dallagym</div>
+      </div>
+
+      <nav role="navigation" aria-label="Primary">
+        <a href="#about">ABOUT</a>
+        <a href="#programs">PROGRAMS</a>
+        <a href="#trainers">TRAINERS</a>
+        <a href="#gallery">GALLERY</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <!-- HERO: rolling images (images/hero1.jpg ~ hero4.jpg) -->
+    <!-- Recommended hero image size:
+         - Desktop: width 1600 ~ 2000 px (16:9 or 3:2)
+         - Format: WebP preferred / JPEG OK
+         - Target file size: 150 ~ 300 KB per image -->
+    <section class="hero" aria-label="Key visual">
+      <div class="slide active" style="background-image:url('images/hero1.jpg')" role="img" aria-label="hero 1"></div>
+      <div class="slide" style="background-image:url('images/hero2.jpg')" role="img" aria-label="hero 2"></div>
+      <div class="slide" style="background-image:url('images/hero3.jpg')" role="img" aria-label="hero 3"></div>
+      <div class="slide" style="background-image:url('images/hero4.jpg')" role="img" aria-label="hero 4"></div>
+
+      <div class="overlay" aria-hidden="true"></div>
+
+      <div class="content wrap" role="region" aria-label="Hero content">
+        <h1>프리미엄 PT 스튜디오 Dallagym</h1>
+        <p class="lead">강렬한 에너지와 고급스러운 맞춤 트레이닝 — 당신의 목표를 디자인합니다.</p>
+
+        <!-- Buttons: PC-only (kakao) / Mobile (kakao + call) -->
+        <div class="btn-row" role="group" aria-label="Consultation actions">
+          <button class="consult-btn pc-only" id="pc-kakao" aria-label="지금 상담하기 (카카오톡)" onclick="openKakao(event)">
+            지금 상담하기
+          </button>
+
+          <div class="mobile-only" style="display:none" aria-hidden="true">
+            <button class="consult-btn" id="mb-kakao" aria-label="카카오톡 상담" onclick="openKakao(event)">
+              카카오톡 상담
+            </button>
+            <button class="consult-btn call" id="mb-call" aria-label="전화 연결" onclick="makeCall()">
+              전화 연결
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="wrap" aria-labelledby="about-title">
+      <h2 id="about-title" class="section-title">ABOUT DALLAGYM</h2>
+      <div class="card" style="max-width:1000px;margin:0 auto">
+        <p>
+          Dallagym은 블랙·골드·레드의 강렬한 정체성을 바탕으로, 프리미엄 1:1 개인 트레이닝과 체형교정,
+          퍼포먼스 향상 프로그램을 제공합니다. 전문 트레이너의 과학적 분석과 맞춤 커리큘럼으로 안전하고 지속 가능한 변화를 약속합니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- PROGRAMS with background (parallax-like) -->
+    <!-- Recommended programs background image:
+         - Width 1600~2000 px, WebP preferred, 150~300 KB -->
+    <section id="programs" class="programs-section" aria-labelledby="programs-title" style="background-image:url('images/programs-bg.jpg')">
+      <div class="wrap">
+        <h2 id="programs-title" class="section-title">OUR PROGRAMS</h2>
+        <p class="lead">목표별로 설계된 전문 프로그램 — 초보자도 부담 없이, 선수 지망생도 만족하는 커리큘럼.</p>
+
+        <div class="program-grid" role="list">
+          <article class="program" role="listitem" aria-labelledby="p1">
+            <h3 id="p1">1:1 Personal Training</h3>
+            <p>개인별 신체특성·목표에 맞춘 전담 트레이너의 맞춤형 프로그램.</p>
+          </article>
+
+          <article class="program" role="listitem" aria-labelledby="p2">
+            <h3 id="p2">Body Shape Program</h3>
+            <p>체형분석 기반의 교정 및 바디라인 개선 프로그램.</p>
+          </article>
+
+          <article class="program" role="listitem" aria-labelledby="p3">
+            <h3 id="p3">Strength & Performance</h3>
+            <p>근력·파워·심폐 능력 향상을 위한 전문 트레이닝.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAINERS -->
+    <section id="trainers" class="wrap" aria-labelledby="trainers-title">
+      <h2 id="trainers-title" class="section-title">OUR TRAINERS</h2>
+      <p class="lead">검증된 전문 트레이너들이 1:1로 케어합니다.</p>
+
+      <div class="trainers-grid" role="list">
+        <!-- Replace with images: images/trainer1.jpg ~ trainer4.jpg -->
+        <article class="trainer-card" role="listitem" aria-labelledby="t1">
+          <div class="trainer-img" style="background-image:url('images/trainer1.jpg')" role="img" aria-label="트레이너 김하늘"></div>
+          <div class="trainer-body">
+            <h4 id="t1">김하늘</h4>
+            <p>체형교정 및 근력 강화 전문. 고객의 몸 상태를 분석하여 안전한 맞춤 코칭을 제공합니다.</p>
+          </div>
+        </article>
+
+        <article class="trainer-card" role="listitem" aria-labelledby="t2">
+          <div class="trainer-img" style="background-image:url('images/trainer2.jpg')" role="img" aria-label="트레이너 박지훈"></div>
+          <div class="trainer-body">
+            <h4 id="t2">박지훈</h4>
+            <p>퍼포먼스 향상 전문가. 운동선수 트레이닝 경험 다수, 효과적이고 체계적인 프로그램 제공.</p>
+          </div>
+        </article>
+
+        <article class="trainer-card" role="listitem" aria-labelledby="t3">
+          <div class="trainer-img" style="background-image:url('images/trainer3.jpg')" role="img" aria-label="트레이너 이서연"></div>
+          <div class="trainer-body">
+            <h4 id="t3">이서연</h4>
+            <p>다이어트 및 바디라인 전문가. 식단과 훈련을 연계한 지속 가능한 감량 솔루션 제공.</p>
+          </div>
+        </article>
+
+        <article class="trainer-card" role="listitem" aria-labelledby="t4">
+          <div class="trainer-img" style="background-image:url('images/trainer4.jpg')" role="img" aria-label="트레이너 최민수"></div>
+          <div class="trainer-body">
+            <h4 id="t4">최민수</h4>
+            <p>기능성·재활 트레이닝 전문가. 부상 예방과 몸의 밸런스 회복에 특화된 코칭.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+<!-- GALLERY -->
+<section id="gallery" class="wrap" aria-labelledby="gallery-title">
+  <h2 id="gallery-title" class="section-title">GALLERY</h2>
+  <p class="lead">스튜디오 분위기 및 트레이닝 순간들</p>
+
+  <div class="gallery-grid" role="list" aria-live="polite">
+    <!-- images/gallery1.jpg ~ gallery8.jpg -->
+    <img role="listitem" loading="lazy" src="images/gallery1.jpg" alt="Gallery image 1" onclick="openModal(this)">
+    <img role="listitem" loading="lazy" src="images/gallery2.jpg" alt="Gallery image 2" onclick="openModal(this)">
+    <img role="listitem" loading="lazy" src="images/gallery3.jpg" alt="Gallery image 3" onclick="openModal(this)">
+    <img role="listitem" loading="lazy" src="images/gallery4.jpg" alt="Gallery image 4" onclick="openModal(this)">
+    <img role="listitem" loading="lazy" src="images/gallery5.jpg" alt="Gallery image 5" onclick="openModal(this)">
+    <img role="listitem" loading="lazy" src="images/gallery6.jpg" alt="Gallery image 6" onclick="openModal(this)">
+    <img role="listitem" loading="lazy" src="images/gallery7.jpg" alt="Gallery image 7" onclick="openModal(this)">
+    <img role="listitem" loading="lazy" src="images/gallery8.jpg" alt="Gallery image 8" onclick="openModal(this)">
+  </div>
+
+  <!-- Modal -->
+  <div id="galleryModal" class="modal" aria-hidden="true">
+    <span class="close" role="button" tabindex="0" aria-label="닫기">&times;</span>
+    <img class="modal-content" id="modalImg" alt="">
+  </div>
+</section>
+
+<style>
+  /* 기존 gallery-grid 수정 */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .gallery-grid img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform .32s, box-shadow .32s;
+  }
+  .gallery-grid img:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 10px rgba(245,209,66,0.4);
+  }
+
+  /* 반응형 */
+  @media (max-width:980px){
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid img { height: 160px; }
+  }
+
+  /* Modal (확대 보기) */
+  .modal {
+    display:none;
+    position:fixed;
+    z-index:2000;
+    left:0; top:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.9);
+    backdrop-filter: blur(6px);
+    justify-content:center;
+    align-items:center;
+  }
+  .modal.open { display:flex; animation:fadeIn .25s ease-in-out; }
+  .modal-content {
+    max-width:90%; max-height:80%;
+    border-radius:12px;
+    box-shadow:0 0 20px rgba(0,0,0,0.6);
+  }
+  .close {
+    position:absolute; top:20px; right:40px;
+    color:#fff; font-size:40px; font-weight:bold; cursor:pointer;
+    transition:color .2s;
+  }
+  .close:hover, .close:focus { color:var(--gold); outline:none; }
+
+  @keyframes fadeIn {
+    from {opacity:0; transform:scale(0.95);}
+    to {opacity:1; transform:scale(1);}
+  }
+</style>
+
+<script>
+  // Modal open/close logic
+  function openModal(img){
+    const modal = document.getElementById('galleryModal');
+    const modalImg = document.getElementById('modalImg');
+    modalImg.src = img.src;
+    modalImg.alt = img.alt;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+
+  document.querySelector('.modal .close').onclick = function(){
+    const modal = document.getElementById('galleryModal');
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+  };
+
+  // ESC 키 닫기
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      const modal = document.getElementById('galleryModal');
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+  });
+</script>
+
+
+    <!-- CONTACT with parallax-like background -->
+    <!-- Recommended contact background image:
+         - Width 1600~2000 px, WebP preferred, 150~300 KB -->
+    <section id="contact" class="contact-section" aria-labelledby="contact-title" style="background-image:url('images/contact-bg.jpg')">
+      <div class="wrap">
+        <h2 id="contact-title" class="section-title" style="color:var(--gold)">CONTACT US</h2>
+        <div class="contact-card" role="region" aria-label="Contact information">
+          <p>문의 및 상담: <strong>010-1234-5678</strong></p>
+          <p>주소: <strong>서울시 강남구 양재동</strong></p>
+          <p style="color:var(--muted);margin-top:8px">운영시간: 평일 07:00 - 22:00 / 주말 09:00 - 18:00</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="wrap" style="text-align:center;color:#9b9b9b;padding:16px 0">
+      &copy; 2025 Dallagym PT Studio · All rights reserved.
+    </div>
+  </footer>
+
+  <!-- ====== SCRIPT: slider, button behavior, accessibility ====== -->
+  <script>
+    // ====== CONFIG - replace with your actual contact info ======
+    const kakaoUrl = 'https://pf.kakao.com/_yourkakaoID'; // <-- 카카오채널/오픈채팅 주소로 교체
+    const phoneNumber = '010-1234-5678'; // <-- 실제 상담번호로 교체
+
+    // ====== HERO Slider ======
+    (function(){
+      const slides = document.querySelectorAll('.hero .slide');
+      if(!slides || slides.length === 0) return;
+      let idx = 0;
+      const delay = 4000;
+      // Respect reduced motion
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(reduce){ slides.forEach((s,i)=>{ s.classList.toggle('active', i===0); }); return; }
+
+      slides.forEach((s,i)=>{ if(i===0) s.classList.add('active'); });
+
+      setInterval(()=>{
+        slides[idx].classList.remove('active');
+        idx = (idx+1) % slides.length;
+        slides[idx].classList.add('active');
+      }, delay);
+    })();
+
+    // ====== Button display by viewport width ======
+    (function(){
+      const mobileOnly = document.querySelector('.mobile-only');
+      const pcOnlyBtns = document.querySelectorAll('.pc-only');
+      function update(){
+        const isMobile = window.innerWidth <= 780;
+        if(mobileOnly) mobileOnly.style.display = isMobile ? 'flex' : 'none';
+        pcOnlyBtns.forEach(b=> b.style.display = isMobile ? 'none' : 'inline-flex');
+      }
+      update();
+      window.addEventListener('resize', update);
+    })();
+
+    // ====== Open kakao (new tab) & animation ======
+    function openKakao(e){
+      const btn = e.currentTarget;
+      btn.setAttribute('aria-pressed','true');
+      // brief click animation handled by CSS :active and JS pulse fallback
+      try {
+        window.open(kakaoUrl, '_blank', 'noopener,noreferrer');
+      } catch(err) {
+        window.location.href = kakaoUrl;
+      }
+      setTimeout(()=> btn.removeAttribute('aria-pressed'), 400);
+    }
+
+    // ====== phone call (tel:) - mobile browsers will handle it ======
+    function makeCall(){
+      const tel = 'tel:' + phoneNumber.replace(/[^0-9+]/g,'');
+      window.location.href = tel;
+    }
+
+    // ====== Accessibility: enter key triggers focused consult button ======
+    document.addEventListener('keydown', (ev)=>{
+      if(ev.key === 'Enter'){
+        const active = document.activeElement;
+        if(active && active.classList && active.classList.contains('consult-btn')){
+          active.click();
+        }
+      }
+    });
+
+    // ====== Ensure focus outline for keyboard users ======
+    (function(){
+      function handleFirstTab(e){
+        if(e.key === 'Tab'){
+          document.body.classList.add('show-focus');
+          window.removeEventListener('keydown', handleFirstTab);
+        }
+      }
+      window.addEventListener('keydown', handleFirstTab);
+    })();
+  </script>
+</body>
+</html>
