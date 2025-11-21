@@ -192,6 +192,17 @@
    - Format: JPEG or WebP, target size 80~200 KB per image
 */
 
+/* TRAINER TITLE (직함) */
+.trainer-title{
+    font-size: 0.8rem;
+    margin-left: 8px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: rgba(255,0,0,0.15);
+    color: #ff4b4b;
+    vertical-align: middle;
+}
+
 
     /* GALLERY */
     .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:18px}
@@ -344,7 +355,7 @@
         <article class="trainer-card" role="listitem" aria-labelledby="t1">
           <div class="trainer-img" style="background-image:url('images/trainer1.jpg')" role="img" aria-label="트레이너 김하늘"></div>
           <div class="trainer-body">
-            <h4 id="t1">장동훈</h4>
+            <h4 id="t1">장동훈 <span class="trainer-title">CEO</span></h4>
             <p>전) 2024 대한보디빌딩협회 국가대표 감독</br>
                   현) 서울특별시 보디빌딩협회 회장</br>
                   현) 대한보디빌딩협회 심판</br>
@@ -358,7 +369,7 @@
         <article class="trainer-card" role="listitem" aria-labelledby="t2">
           <div class="trainer-img" style="background-image:url('images/trainer2.jpg')" role="img" aria-label="트레이너 박지훈"></div>
           <div class="trainer-body">
-            <h4 id="t2">박지훈</h4>
+            <h4 id="t2">박지훈 <span class="trainer-title">MASTER TRAINER</span></h4>
             <p>퍼포먼스 향상 전문가. 운동선수 트레이닝 경험 다수, 효과적이고 체계적인 프로그램 제공.</p>
           </div>
         </article>
@@ -366,7 +377,7 @@
         <article class="trainer-card" role="listitem" aria-labelledby="t3">
           <div class="trainer-img" style="background-image:url('images/trainer3.jpg')" role="img" aria-label="트레이너 이서연"></div>
           <div class="trainer-body">
-            <h4 id="t3">이서연</h4>
+            <h4 id="t3">이서연 <span class="trainer-title">MASTER TRAINER</span></h4>
             <p>다이어트 및 바디라인 전문가. 식단과 훈련을 연계한 지속 가능한 감량 솔루션 제공.</p>
           </div>
         </article>
@@ -374,7 +385,7 @@
         <article class="trainer-card" role="listitem" aria-labelledby="t4">
           <div class="trainer-img" style="background-image:url('images/trainer4.jpg')" role="img" aria-label="트레이너 최민수"></div>
           <div class="trainer-body">
-            <h4 id="t4">최민수</h4>
+            <h4 id="t4">최민수 <span class="trainer-title">MASTER TRAINER</span></h4>
             <p>기능성·재활 트레이닝 전문가. 부상 예방과 몸의 밸런스 회복에 특화된 코칭.</p>
           </div>
         </article>
@@ -592,4 +603,3 @@
   </script>
 </body>
 </html>
-
