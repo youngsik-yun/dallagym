@@ -10,6 +10,9 @@
 
   <meta name="description" content="Dallagym - 프리미엄 PT 스튜디오. 1:1 맞춤 트레이닝, 체형교정, 퍼포먼스 향상" />
 
+<!-- Favicon -->
+<link rel="icon" href="images/favicon.png" type="image/png" />
+
   <style>
     :root{
       --black:#070707;
@@ -216,6 +219,58 @@
     .contact-section{position:relative;color:#fff;background-attachment:fixed;background-position:center;background-size:cover;border-top:1px solid rgba(255,255,255,0.02)}
     .contact-card{max-width:720px;margin:0 auto;background:linear-gradient(180deg, rgba(0,0,0,0.48), rgba(0,0,0,0.48));padding:22px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);text-align:center}
     .contact-card p{color:var(--muted);margin:8px 0;font-size:1.05rem}
+
+/* CONTACT BUTTONS */
+.contact-buttons{
+    display:flex;
+    justify-content:center;
+    gap:22px;
+    margin-top:40px;
+    flex-wrap:wrap;
+}
+
+/* 공통 버튼 스타일 (크기 동일하도록 고정) */
+.contact-btn{
+    width:180px;              /* 버튼 가로 크기 동일 */
+    height:54px;              /* 버튼 높이 동일 */
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+    font-size:1.05rem;
+    font-weight:700;
+    text-decoration:none;
+    letter-spacing:0.5px;
+
+    transition:all .25s ease;
+    border:1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(8px);
+
+    padding:0;                /* 높이 고정했으므로 패딩 제거 */
+}
+
+/* 네이버 블로그 버튼 */
+.blog-btn{
+    background:rgba(255,255,255,0.08);
+    color:#fff;
+}
+.blog-btn:hover{
+    background:rgba(255,255,255,0.18);
+    transform:translateY(-4px);
+}
+
+/* 카카오 버튼 */
+.kakao-btn{
+    background:linear-gradient(135deg, #d4a947, #c89b2d);
+    color:#000;
+}
+.kakao-btn:hover{
+    background:linear-gradient(135deg, #e6c06b, #d4a947);
+    transform:translateY(-4px);
+}
+
+
 
     /* FOOTER */
     footer{padding:28px 12px;text-align:center;color:#9b9b9b;background:linear-gradient(180deg,#070707,#050505)}
@@ -514,6 +569,19 @@
           <p style="color:var(--muted);margin-top:8px">운영시간: 평일 06:00 - 24:00 / 주말 08:00 - 22:00</p>
         </div>
       </div>
+
+<div class="contact-buttons">
+    <a href="https://blog.naver.com/dallagympt" target="_blank" class="contact-btn blog-btn">
+        블로그
+    </a>
+
+    <a href="http://pf.kakao.com/_GxcGTd/chat" target="_blank" class="contact-btn kakao-btn">
+        카톡 문의
+    </a>
+</div>
+
+
+
     </section>
   </main>
 
